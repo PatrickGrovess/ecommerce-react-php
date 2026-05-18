@@ -4,7 +4,8 @@ node_modules/
 
 # Entorno / Seguridad
 .env
-config.php
+backend/config/db.php
+
 
 # Builds
 dist/
