@@ -30,25 +30,23 @@ Antes de comenzar, asegúrate de tener instalado:
 
 ## ⚙️ Configuración del Entorno
 
-Para que el sistema funcione correctamente, es obligatorio configurar las credenciales de la base de datos en el backend.
+Para que el sistema funcione correctamente, es obligatorio configurar las credenciales de la base de datos en el backend. Al explorar la carpeta del Backend, verás directorios como `models`, `controllers`, entre otros.
 
-### 1. Backend (PHP)
-Ve a la carpeta del servidor de backend y localiza los archivos ahi veras archivos como models, controllers etc. Lo que tienes que hacer es:
-* Crear una carpeta dentro de la carpeta Backend llamada config (Minuscula)  
-* dentro de la carpeta config crear un archivo llamado `db.php` y configura tus credenciales locales de MySQL:
-* 
-  ```php
-  // Puedes usar este codigo de abajo db.php
-  
-  <?php
+### 1. Configuración de la Base de Datos (PHP)
+1. Crea una carpeta llamada `config` (en minúsculas) dentro de la raíz de la carpeta `backend`.
+2. Dentro de `config`, crea un archivo llamado `db.php`.
+3. Copia y pega el siguiente código en `db.php` y ajusta tus credenciales locales de MySQL:
+
+```php
+<?php
 
 namespace Config;
 
 use mysqli;
 
-class db{
-    public static function conectar(){
-        $db = new mysqli("localhost", "Tu Usuario", "Tu Contraseña", "El nombre de la DB");
+class db {
+    public static function conectar() {
+        $db = new mysqli("localhost", "Tu_Usuario", "Tu_Contraseña", "E_commer_MVC_PHP_ReactJS");
 
         if ($db->connect_error) {
             die("Error de conexión: " . $db->connect_error);
@@ -60,26 +58,25 @@ class db{
     }
 }
 
-  * Tambien debes crear la db y las tablas en SQL para poder registrar productos y usuarios
-create database E_commer_MVC_PHP_ReactJS;
-use E_commer_MVC_PHP_ReactJS;
 
-CREATE TABLE usuarios(
-	id int auto_increment primary key,
-    nombre varchar(100),
-    email varchar(100) unique,
-    password varchar(255),
-    rol ENUM("admin", "cliente") default "cliente"
+CREATE DATABASE E_commer_MVC_PHP_ReactJS;
+USE E_commer_MVC_PHP_ReactJS;
+
+CREATE TABLE usuarios (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(255),
+    rol ENUM('admin', 'cliente') DEFAULT 'cliente'
 );
 
-CREATE TABLE productos(
-	id int auto_increment primary key,
-    nombre varchar(100),
+CREATE TABLE productos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100),
     descripcion TEXT,
-    precio decimal(10,2),
+    precio DECIMAL(10,2),
     stock INT,
-    imagen_url varchar(255)
+    imagen_url VARCHAR(255)
 );
 
-* Eso es todo. Cuando crees un usuario desde la db haces un update al rol de la tabla usuario,
-* por defecto se asigna cliente la cambias a admin y tendras acceso al panel admin
+*Ejecuta el siguiente script en tu gestor de base de datos es para poder guardar los productos y usuarios registrados
