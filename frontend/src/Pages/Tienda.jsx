@@ -4,6 +4,7 @@ import { AuthContext } from '../Context/AuthContext';
 // import imagenReferencia from "./assets/imgProductos/imgReferencia.jpg"
 import { Link } from "react-router-dom"
 import Registro from './Registro';
+import configuracion from './Configuracion';
 
 
 function Tienda() {
@@ -100,21 +101,21 @@ function Tienda() {
                                         <div onClick={toggleMenu} className="relative cursor-pointer">
                                             <img width={13} src="https://cdn-icons-png.flaticon.com/512/32/32195.png" alt="" />
                                             {abierto ? (
-                                                <div className='absolute top-12 right-0 bg-white border border-gray-200 rounded-lg shadow-lg p-4 w-48'>
-                                                    <a className='cursor-pointer' href="#">
+                                                <Link to="/configuracion">
+                                                    <div className='absolute top-12 right-0 bg-white border border-gray-200 rounded-lg shadow-lg p-4 w-48'>
                                                         <button
                                                             className="w-full text-left text-[10px] bg-gray-100 hover:bg-blue-100 hover:text-blue-600 px-2 py-1 rounded transition-colors font-bold uppercase"
                                                         >
-                                                            Configuración
+                                                            configuración
                                                         </button>
-                                                    </a>
-                                                    <button
-                                                        onClick={logout}
-                                                        className="w-full text-left text-[10px] bg-gray-100 hover:bg-red-100 hover:text-red-600 px-2 py-1 rounded transition-colors font-bold uppercase"
-                                                    >
-                                                        Salir
-                                                    </button>
-                                                </div>
+                                                        <button
+                                                            onClick={logout}
+                                                            className="w-full text-left text-[10px] bg-gray-100 hover:bg-red-100 hover:text-red-600 px-2 py-1 rounded transition-colors font-bold uppercase"
+                                                        >
+                                                            Salir
+                                                        </button>
+                                                    </div>
+                                                </Link>
                                             ) : null
                                             }
                                         </div>

@@ -6,6 +6,7 @@ import Registro from './Pages/Registro';
 import Tienda from './Pages/Tienda';
 import Login from './Pages/Login';
 import AdminDashboard from './Pages/AdminDashboard';
+import Configuracion from "./Pages/Configuracion";
 function App() {
 
   const { usuario, cargando } = useContext(AuthContext)
@@ -17,6 +18,7 @@ function App() {
       <Route path="/" element={<Tienda />} />
       <Route path="/registro" element={<Registro />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/configuracion" element={<Configuracion />} />
       {/* <Route path="/admin" element={<AdminDashboard />} /> */}
 
       <Route
