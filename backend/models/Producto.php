@@ -43,4 +43,13 @@ class Producto
 
         return $stmt->execute();
     }
+
+    public static function eliminar($id)
+    {
+        $db = db::conectar();
+        $query = "DELETE FROM productos WHERE id = ?";
+        $stmt = $db->prepare($query);
+        $stmt->bind_param('i', $id);
+        return $stmt->execute();
+    }
 }

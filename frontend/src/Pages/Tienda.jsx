@@ -12,7 +12,7 @@ function Tienda() {
     const [cargando, setCargando] = useState(true);
     const [busqueda, setBusqueda] = useState("");
     const { usuario, logout } = useContext(AuthContext);
-
+    const [abierto, setAbierto] = useState(false);
     // 2. Filtramos el array de productos original basado en el texto de búsqueda
     const productosFiltrados = productos.filter((producto) => {
         // Convertimos todo a minúsculas para que la búsqueda no sea estricta con las mayúsculas
@@ -39,9 +39,14 @@ function Tienda() {
         }
     }
 
+    function toggleMenu() {
+        setAbierto(!abierto);
+    }
+
     useEffect(() => {
         obtenerDatos();
     }, []);
+
 
 
     return (
@@ -91,18 +96,47 @@ function Tienda() {
                                     <div className="text-right">
                                         <p className="text-[10px] text-[#3B82F6] font-bold uppercase leading-none">Bienvenido</p>
                                         <p className="text-sm font-black text-gray-800 uppercase">{usuario.nombre}</p>
+
+                                        <div onClick={toggleMenu} className="relative cursor-pointer">
+                                            <img width={13} src="https://cdn-icons-png.flaticon.com/512/32/32195.png" alt="" />
+                                            {abierto ? (
+                                                <div className='absolute top-12 right-0 bg-white border border-gray-200 rounded-lg shadow-lg p-4 w-48'>
+                                                    <a className='cursor-pointer' href="#">
+                                                        <button
+                                                            className="w-full text-left text-[10px] bg-gray-100 hover:bg-blue-100 hover:text-blue-600 px-2 py-1 rounded transition-colors font-bold uppercase"
+                                                        >
+                                                            Configuración
+                                                        </button>
+                                                    </a>
+                                                    <button
+                                                        onClick={logout}
+                                                        className="w-full text-left text-[10px] bg-gray-100 hover:bg-red-100 hover:text-red-600 px-2 py-1 rounded transition-colors font-bold uppercase"
+                                                    >
+                                                        Salir
+                                                    </button>
+                                                </div>
+                                            ) : null
+                                            }
+                                        </div>
                                     </div>
-                                    <button
+                                    {/* <button
                                         onClick={logout}
                                         className="text-[10px] bg-gray-100 hover:bg-red-100 hover:text-red-600 px-2 py-1 rounded transition-colors font-bold uppercase"
                                     >
                                         Salir
-                                    </button>
+                                    </button> */}
                                 </div>
                             ) : (
                                 <Link to="/login">
                                     <p className="text-[10px] text-gray-400 font-bold uppercase leading-none">Inicia</p>
                                     <p className="text-sm font-black text-gray-800">Sesión</p>
+                                </Link>
+                            )}
+
+                            {usuario?.rol === 'admin' && (
+                                <Link to="/admin">
+                                    <p className="text-[10px] text-gray-400 font-bold uppercase leading-none">Panel</p>
+                                    <p className="text-sm font-black text-gray-800">Admin</p>
                                 </Link>
                             )}
 

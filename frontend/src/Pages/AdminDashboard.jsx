@@ -24,6 +24,31 @@ const AdminDashboard = () => {
 
   })
 
+  const eliminarProducto = async (id) => {
+    if (!confirm("¿Estás seguro de que deseas eliminar este producto?")) return;
+    try {
+      const respuesta = await fetch(`http://localhost:3001/api/prueba?id=${id}`, {
+        method: "DELETE"
+      });
+
+      const resultado = await respuesta.json();
+
+      if (resultado.success) {
+        alert(`Producto eliminado exitosamente, ${resultado.success}!`)
+
+        setProductos((prev) => prev.filter((p) => p.id !== id));
+      }
+      else {
+        alert(`Error al eliminar el producto, ${resultado.error}!`)
+      }
+
+    } catch (error) {
+      alert("Error al eliminar el producto. Inténtalo de nuevo.")
+    }
+
+
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
@@ -387,6 +412,7 @@ const AdminDashboard = () => {
 
                               {/* Botón Eliminar */}
                               <button
+                                onClick={() => eliminarProducto(producto.id)}
                                 className="w-10 h-10 flex items-center justify-center text-red-600 bg-red-50 hover:bg-red-600 hover:text-white rounded-xl transition-all duration-200 shadow-sm shadow-red-100 group/delete"
                                 title="Eliminar producto"
                               >

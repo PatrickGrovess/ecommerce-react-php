@@ -16,6 +16,10 @@ class Router{
         $this->postRoutes[$url] = $fn;
     }
 
+    public function delete($url, $fn){
+        $this->postRoutes[$url] = $fn; // Usamos postRoutes para DELETE también
+    }
+
     public function comprobarRutas(){
         $currentUrl = $_SERVER["PATH_INFO"] ?? "/";
         $method = $_SERVER["REQUEST_METHOD"];
